@@ -1,12 +1,12 @@
 # Backend de Login e Cadastro (Django)
 
 ## Passos
-1. Crie e ative um virtualenv.
-2. Instale dependências: `pip install -r requirements.txt`
-3. Aplique migrações: `python manage.py migrate`
-4. Crie superusuário: `python manage.py createsuperuser`
-5. Rode o servidor: `python manage.py runserver`
-6. Acesse:
+1. Criar e ativar um virtualenv.
+2. Instalar dependências: `pip install -r requirements.txt`
+3. Aplicar migrações: `python manage.py migrate`
+4. Criar superusuário: `python manage.py createsuperuser`
+5. Rodar o servidor: `python manage.py runserver`
+6. Acesso:
    - `/entrar/` (login)
    - `/registrar/` (cadastro)
    - `/cadastro/pacientes/` (endpoint de teste em JSON)
