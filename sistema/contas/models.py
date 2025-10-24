@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.utils import timezone
 
+# ------------------------
+# CLASSE BASE - USUÁRIO
+# ------------------------
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -49,3 +52,31 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.email} ({self.get_tipo_display()})"
+
+# ------------------------
+# SUBCLASSES ESPECÍFICAS
+# ------------------------
+
+class Clinica(Usuario):
+    cnpj = models.CharField(max_length=18, unique=True, null=True, blank=True)
+    nome_fantasia = models.CharField(max_length=150, blank=True)
+
+    class Meta:
+        verbose_name = "clínica"
+        verbose_name_plural = "clínicas"
+
+class Terapeuta(Usuario):
+    crp = models.CharField(max_length=20, unique=True, null=True, blank=True)
+    especialidade = models.CharField(max_length=100, blank=True)
+
+    class Meta:
+        verbose_name = "terapeuta"
+        verbose_name_plural = "terapeutas"
+
+class Familiar(Usuario):
+    parentesco = models.CharField(max_length=50, blank=True)
+    telefone = models.CharField(max_length=15, blank=True)
+
+    class Meta:
+        verbose_name = "familiar"
+        verbose_name_plural = "familiares"
