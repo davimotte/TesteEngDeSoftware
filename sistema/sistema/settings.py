@@ -52,14 +52,14 @@ WSGI_APPLICATION = 'sistema.wsgi.application'
 # Database: prefer Postgres if PGHOST is set; fallback to SQLite
 if os.getenv('PGHOST'):
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('PGDATABASE', 'minhabasedev'),
-            'USER': os.getenv('PGUSER', 'postgres'),
-            'PASSWORD': os.getenv('PGPASSWORD', ''),
-            'HOST': os.getenv('PGHOST', 'db'),
-            'PORT': os.getenv('PGPORT', '5432'),
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'meu_projeto_db',
+        'USER': 'admin',
+        'PASSWORD': 'admin_password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
     }
 else:
     DATABASES = {

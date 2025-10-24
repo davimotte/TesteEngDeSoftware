@@ -1,32 +1,19 @@
+version: '3.8'
+
 services:
   db:
-    image: postgres:16
+    image: postgres:14-alpine
+    container_name: meu_projeto_db_container
     environment:
-      POSTGRES_DB: ${PGDATABASE:-minhabasedev}
-      POSTGRES_USER: ${PGUSER:-postgres}
-      POSTGRES_PASSWORD: ${PGPASSWORD:-postgres}
+      POSTGRES_DB: meu_projeto_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin_password
     ports:
       - "5432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${PGUSER:-postgres} -d ${PGDATABASE:-minhabasedev}"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
     volumes:
-      - pgdata:/var/lib/postgresql/data
-
-  web:
-    build: .
-    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-    env_file:
-      - .env
-    ports:
-      - "8000:8000"
-    depends_on:
-      db:
-        condition: service_healthy
-    volumes:
-      - .:/app
+      
+      - ./db_scripts:/docker-entrypoint-initdb.d
+            - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  pgdata:
+  postgres_data:
