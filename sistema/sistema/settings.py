@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'contas',
     'autenticacao',
     'cadastro',
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -28,6 +29,16 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",  # dev
+        # "rest_framework_simplejwt.authentication.JWTAuthentication",  # produção
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",  # troque para IsAuthenticated em produção
+    ],
+}
 
 ROOT_URLCONF = 'sistema.urls'
 

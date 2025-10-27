@@ -56,8 +56,18 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 # ------------------------
 # SUBCLASSES ESPECÍFICAS
 # ------------------------
+# Declaramos explicitamente o parent link para:
+# - evitar reverse accessor padrão (que colidia com a app cadastro)
+# - usar nomes reversos únicos (contas_*)
 
 class Clinica(Usuario):
+    usuario_ptr = models.OneToOneField(
+        Usuario,
+        on_delete=models.CASCADE,
+        parent_link=True,
+        related_name="contas_clinica",
+        primary_key=True,
+    )
     cnpj = models.CharField(max_length=18, unique=True, null=True, blank=True)
     nome_fantasia = models.CharField(max_length=150, blank=True)
 
@@ -66,6 +76,13 @@ class Clinica(Usuario):
         verbose_name_plural = "clínicas"
 
 class Terapeuta(Usuario):
+    usuario_ptr = models.OneToOneField(
+        Usuario,
+        on_delete=models.CASCADE,
+        parent_link=True,
+        related_name="contas_terapeuta",
+        primary_key=True,
+    )
     crp = models.CharField(max_length=20, unique=True, null=True, blank=True)
     especialidade = models.CharField(max_length=100, blank=True)
 
@@ -74,6 +91,13 @@ class Terapeuta(Usuario):
         verbose_name_plural = "terapeutas"
 
 class Familiar(Usuario):
+    usuario_ptr = models.OneToOneField(
+        Usuario,
+        on_delete=models.CASCADE,
+        parent_link=True,
+        related_name="contas_familiar",
+        primary_key=True,
+    )
     parentesco = models.CharField(max_length=50, blank=True)
     telefone = models.CharField(max_length=15, blank=True)
 
