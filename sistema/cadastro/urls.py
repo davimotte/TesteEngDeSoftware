@@ -1,12 +1,10 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .api.views import TerapeutaViewSet, PacienteViewSet, FamiliarViewSet
-
-router = DefaultRouter()
-router.register(r"terapeutas", TerapeutaViewSet, basename="terapeuta")
-router.register(r"pacientes", PacienteViewSet, basename="paciente")
-router.register(r"familiares", FamiliarViewSet, basename="familiar")
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path("familiares", views.criar_familiar, name="familiares-criar"),
+    path("terapeutas", views.criar_terapeuta, name="terapeutas-criar"),
+    path("pacientes", views.criar_paciente, name="pacientes-criar"),
+    path("clinicas", views.criar_clinica, name="clinicas-criar"),
+    path("usuarios/<int:id_usuario>/consentimento", views.registrar_consentimento, name="usuarios-consentimento"),
 ]
