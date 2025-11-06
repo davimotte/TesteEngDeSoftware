@@ -1,6 +1,9 @@
 from rest_framework import serializers
 import re
 
+# Esta linha "from .models import ..." FOI REMOVIDA.
+# É isso que estava causando o erro.
+
 CPF_RE = re.compile(r"^\d{11}$")
 CNPJ_RE = re.compile(r"^\d{14}$")  # simples: só dígitos; ajuste se quiser validar DV
 FONE_RE = re.compile(r"^[0-9()+\-\s]{8,20}$")  # bem permissivo

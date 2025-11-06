@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'contas',
     'autenticacao',
     'cadastro',
+    'corsheaders',
     "rest_framework",
 ]
 
@@ -27,6 +28,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -60,25 +62,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sistema.wsgi.application'
 
-# Database: prefer Postgres if PGHOST is set; fallback to SQLite
-if os.getenv('PGHOST'):
-    DATABASES = {
+
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'meu_projeto_db',
-        'USER': 'admin',
-        'PASSWORD': 'admin_password',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'app',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '127.0.0.1',
+        'PORT': '5433',
     }
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -102,3 +97,9 @@ AUTH_USER_MODEL = 'contas.Usuario'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/entrar/'
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000", # Ex: se seu front é React/Vue
+    "http://127.0.0.1:3000",
+]

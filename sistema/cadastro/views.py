@@ -109,3 +109,5 @@ def registrar_consentimento(request, id_usuario: int):
             return Response({"ok": True}, status=status.HTTP_200_OK)
     except UndefinedFunction:
         return Response({"detail": "Função registrar_consentimento não encontrada."}, status=500)
+    
+

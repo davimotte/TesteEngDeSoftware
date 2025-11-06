@@ -8,3 +8,4 @@ urlpatterns = [
     path("clinicas", views.criar_clinica, name="clinicas-criar"),
     path("usuarios/<int:id_usuario>/consentimento", views.registrar_consentimento, name="usuarios-consentimento"),
 ]
+
